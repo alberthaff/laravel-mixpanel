@@ -14,28 +14,27 @@
         }
     },
     "require": {
-        "php": ">=7.1.3",
-        "illuminate/auth": "5.5 - 5.8",
-        "illuminate/config": "5.5 - 5.8",
-        "illuminate/console": "5.5 - 5.8",
-        "illuminate/events": "5.5 - 5.8",
-        "illuminate/http": "5.5 - 5.8",
-        "illuminate/routing": "5.5 - 5.8",
-        "illuminate/queue": "5.5 - 5.8",
-        "illuminate/support": "5.5 - 5.8",
-        "mixpanel/mixpanel-php": "*",
-        "sinergi/browser-detector": "*"
+        "illuminate/auth": "^7.0",
+        "illuminate/config": "^7.0",
+        "illuminate/console": "^7.0",
+        "illuminate/events": "^7.0",
+        "illuminate/http": "^7.0",
+        "illuminate/routing": "^7.0",
+        "illuminate/queue": "^7.0",
+        "illuminate/support": "^7.0",
+        "mixpanel/mixpanel-php": "^2.7",
+        "sinergi/browser-detector": "^6.1"
     },
     "require-dev": {
-        "fzaninotto/faker": "*",
-        "laravel/laravel": "5.8",
-        "laravel/browser-kit-testing": "*",
-        "mockery/mockery": "*",
-        "phpmd/phpmd": "*",
-        "phpunit/phpunit": "*",
-        "sebastian/phpcpd": "*",
-        "symfony/thanks": "*",
-        "php-coveralls/php-coveralls": "*"
+        "fzaninotto/faker": "^1.8",
+        "laravel/laravel": "^7.0",
+        "laravel/browser-kit-testing": "^6.0",
+        "phpmd/phpmd": "^2.7",
+        "phpunit/phpunit": "^8.5",
+        "sebastian/phpcpd": "^5.0",
+        "symfony/thanks": "^1.2",
+        "php-coveralls/php-coveralls": "^2.1",
+        "squizlabs/php_codesniffer": "^3.5"
     },
     "autoload-dev": {
         "psr-4": {
@@ -51,5 +50,7 @@
                 "Mixpanel": "GeneaLabs\\LaravelMixpanel\\Facades\\Mixpanel"
             }
         }
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

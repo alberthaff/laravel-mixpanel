@@ -9,6 +9,37 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 (This is already detected in subscription update.)
 - Filter any incoming web-hook events that are in test mode.
 
+## [0.10.3] - 2020-08-05
+### Added
+- configuration option for MixPanel Host.
+
+## [0.10.1] - 2020-03-04
+### Updated
+- Laravel dependency to release version.
+
+## [0.10.0] - 2020-02-29
+### Added
+- Laravel 7 compatibility.
+
+## [0.9.1] - 2019-10-18
+### Added
+- functionality to inject custom data points into track events.
+
+### Fixed
+- Laravel 6.x compatibility.
+
+## [0.9.0] - 2019-08-28
+### Added
+- Laravel 6.0 compatibility.
+
+## [0.8.1] - 2019-07-28
+### Fixed
+- tracking of user information.
+
+## [0.8.0] - 2019-04-05
+### Added
+- Laravel 5.8 compatibility.
+
 ## [0.7.11] - 5 Oct 2018
 ### Added
 - Laravel 5.7 compatibility.

@@ -1,11 +1,12 @@
-# MixPanel for Laravel 5
-[![Join the chat at https://gitter.im/GeneaLabs/laravel-mixpanel](https://badges.gitter.im/GeneaLabs/laravel-mixpanel.svg)](https://gitter.im/GeneaLabs/laravel-mixpanel?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-[![Travis](https://img.shields.io/travis/GeneaLabs/laravel-mixpanel.svg)](https://travis-ci.org/GeneaLabs/laravel-mixpanel)
+# MixPanel for Laravel
+
 [![Scrutinizer](https://img.shields.io/scrutinizer/g/GeneaLabs/laravel-mixpanel.svg)](https://scrutinizer-ci.com/g/GeneaLabs/laravel-mixpanel)
 [![Coveralls](https://img.shields.io/coveralls/GeneaLabs/laravel-mixpanel.svg)](https://coveralls.io/github/GeneaLabs/laravel-mixpanel)
 [![GitHub (pre-)release](https://img.shields.io/github/release/GeneaLabs/laravel-mixpanel/all.svg)](https://github.com/GeneaLabs/laravel-mixpanel)
 [![Packagist](https://img.shields.io/packagist/dt/GeneaLabs/laravel-mixpanel.svg)](https://packagist.org/packages/genealabs/laravel-mixpanel)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/GeneaLabs/laravel-mixpanel/master/LICENSE)
+
+![Mixpanel for Laravel masthead image.](https://repository-images.githubusercontent.com/42419266/0f534200-f1b5-11e9-9ca7-57b0e1fe7764)
 
 ## Features
 - Asynchronous data transmission to Mixpanel's services. This prevents any
@@ -17,67 +18,59 @@
  Blade template use.
 
 ## Requirements and Compatibility
-- PHP >= 7.1.3
-- Laravel >= 5.5
+- PHP >= 7.2
+- Laravel >= 7.0
 
 ### Legacy Versions
 - [Laravel 5.2](https://github.com/GeneaLabs/laravel-mixpanel/tree/afcf3737412c1aebfa9dd1d7687001f78bdb3956)
 - [Laravel 5.0](https://github.com/GeneaLabs/laravel-mixpanel/tree/ce110ebd89658cbf8a91f2cfb5db57e2b449e7f3)
 
 ## Installation
-```sh
-composer require genealabs/laravel-mixpanel
-```
-
-**Only if you are running Laravel 5.4 or below:**
-Add the service provider entry in `config\app.php`:
-```php
-GeneaLabs\LaravelMixpanel\Providers\Service::class,
-```
-
-Verify that your auth configuration file `config/auth.php` has the user model
- specified in `auth.providers.users.model` (or in `auth.model` for L5.1). If
- that entry is missing, go ahead and add it.
-```php
-// Laravel 5.3
-'providers' => [
-    'users' => [
-        'driver' => '...',
-        'model' => App\User::class,
-    ],
-
-// Laravel 5.1
-'model' => App\User::class,
-```
-
-Lastly, add your Mixpanel token to your `.env` file:
-```env
-MIXPANEL_TOKEN=xxxxxxxxxxxxxxxxxxxxxx
-```
+1. Install the package:
+    ```sh
+    composer require genealabs/laravel-mixpanel
+    ```
+2. Add your Mixpanel API Token to your `.env` file:
+    ```env
+    MIXPANEL_TOKEN=xxxxxxxxxxxxxxxxxxxxxx
+    ```
+3. Add the MixPanel Host domain only if you need to change your MixPanel host from the default:
+    ```env
+    MIXPANEL_TOKEN=xxxxxxxxxxxxxxxxxxxxxx
+    ```
 
 ## Configuration
 ### Default Values
+- `services.mixpanel.host`: pulls the 'MIXPANEL_HOST' value from your `.env`
+    file.
 - `services.mixpanel.token`: pulls the 'MIXPANEL_TOKEN' value from your `.env`
- file.
-- `services.mixpanel.enable-default-tracking`: (default: true) enable or disable Laravel user
- event tracking.
-- `services.mixpanel.consumer`: (default: socket) set the Guzzle adapter you want to use.
-- `services.mixpanel.connect-timeout`: (default: 2) set the number of seconds after which
- connections timeout.
-- `services.mixpanel.timeout`: (default: 2) set the number of seconds after which event tracking
- times out.
+    file.
+- `services.mixpanel.enable-default-tracking`: (default: true) enable or disable
+    Laravel user event tracking.
+- `services.mixpanel.consumer`: (default: socket) set the Guzzle adapter you
+    want to use.
+- `services.mixpanel.connect-timeout`: (default: 2) set the number of seconds
+    after which connections timeout.
+- `services.mixpanel.timeout`: (default: 2) set the number of seconds after
+    which event tracking times out.
+- `services.mixpanel.data_callback_class`: (default: null) manipulate the data
+    being passed back to mixpanel for the track events.
 
 ## Upgrade Notes
 ### Version 0.7.0 for Laravel 5.5
-- Remove the service provider from `/config/app.php`. The service provider is now
- auto-discovered in Laravel 5.5.
+- Remove the service provider from `/config/app.php`. The service provider is
+    now auto-discovered in Laravel 5.5.
 
 ### Page Views
-- Page view tracking has been removed in favor of Mixpanels in-built Autotrack functionality, which tracks all page views. To turn it on, visit your Mixpanel dashboard, click *Applications > Autotrack > Web > etc.* and enable Autotracking.
+- Page view tracking has been removed in favor of Mixpanels in-built Autotrack
+    functionality, which tracks all page views. To turn it on, visit your
+    Mixpanel dashboard, click *Applications > Autotrack > Web > etc.* and enable
+    Autotracking.
 
 ## Usage
-MixPanel is loaded into the IoC as a singleton. This means you don't have to manually call $mixPanel::getInstance() as
-described in the MixPanel docs. This is already done for you in the ServiceProvider.
+MixPanel is loaded into the IoC as a singleton. This means you don't have to
+    manually call $mixPanel::getInstance() as described in the MixPanel docs.
+    This is already done for you in the ServiceProvider.
 
 Common user events are automatically recorded:
 - User Registration
@@ -105,7 +98,8 @@ class MyClass
 }
 ```
 
-If DI is impractical in certain situations, you can also manually retrieve it from the IoC:
+If DI is impractical in certain situations, you can also manually retrieve it
+    from the IoC:
 ```php
 $mixPanel = app('mixpanel'); // using app helper
 $mixPanel = Mixpanel::getFacadeRoot(); // using facade
@@ -120,8 +114,8 @@ After that you can make the usual calls to the MixPanel API:
   And so on ...
 
   ### Stripe Web-Hook
-  If you wish to take advantage of the Stripe web-hook and track revenue per user,
-   you should install Cashier: https://www.laravel.com/docs/5.5/billing
+  If you wish to take advantage of the Stripe web-hook and track revenue per
+    user, you should install Cashier: https://www.laravel.com/docs/5.5/billing
 
   Once that has been completed, exempt the web-hook endpoint from CSRF-validation
    in `/app/Http/Middleware/VerifyCsrfToken.php`:
@@ -232,6 +226,36 @@ the first name. Otherwise it will look for `first_name` and `last_name` fields i
     Session:
       - Status: Logged Out
   ```
+### Tracking Data Manipulation
+If you need to make changes or additions to the data being tracked, create a
+  class that implements `\GeneaLabs\LaravelMixpanel\Interfaces\DataCallback`:
+
+```php
+<?php
+
+namespace App;
+
+use GeneaLabs\LaravelMixpanel\Interfaces\DataCallback;
+
+class MixpanelUserData implements DataCallback
+{
+    public function process(array $data = []) : array
+    {
+        $data["test"] = "value";
+
+        return $data;
+    }
+}
+```
+
+Then register this class in your `services` configuration:
+
+```php
+    'mixpanel' => [
+      // ...
+        "data_callback_class" => \App\MixpanelUserData::class,
+    ]
+```
 
 ### Stripe Integration
 Many L5 sites are running Cashier to manage their subscriptions. This package creates an API webhook endpoint that keeps
